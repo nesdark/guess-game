@@ -10,9 +10,16 @@
 */
 let randomNumber = Math.round(Math.random() * 10);
 
+alert(randomNumber);
+
 let checkResultButton = document.querySelector('#try');
 
 let attemptsToWin = 0;
+
+function clearInput() {
+  const inputParent = document.querySelector('form');
+  inputParent.reset();
+}
 
 function clearPreviousGame() {
   randomNumber = Math.round(Math.random() * 10);
@@ -20,30 +27,29 @@ function clearPreviousGame() {
   attemptsToWin = 0;
 }
 
-function tryAttempt() {
-  const attemptOfTheUser = document.querySelector('#attempt').value;
-  checkResult(attemptOfTheUser);
-}
+const tryAttemptButton = document.querySelector('#try');
+tryAttemptButton.addEventListener('click', checkAttempt);
 
-function checkResult(attempt) {
+function checkAttempt() {
+  const attemptOfTheUser = document.querySelector('#attempt').value;
+
   attemptsToWin++;
 
-  const playerWin = attempt == randomNumber ? showResult() : showFailure();
-}
+  const playerWin = attemptOfTheUser == randomNumber;
 
-function showResult() {
-  const displayInMain = document.querySelector('main');
+  console.log(playerWin);
+  console.log(attemptOfTheUser);
+  console.log(randomNumber);
 
-  displayInMain.innerHTML = `
-    <h2>You got it right in ${attemptsToWin} attempts</h2>
-    <button id="play-again" onclick="playAgain()">Play Again</button>
-  `;
+  if (playerWin) {
+    toggleScreen('result-screen');
+  } else {
+    showFailure();
+    clearInput();
+  }
 }
 
 function showFailure() {
-  let inputParent = document.querySelector('form');
-  inputParent.reset();
-
   const elementFail = document.querySelector('#when-fail');
 
   elementFail.innerHTML = `
@@ -54,16 +60,27 @@ function showFailure() {
 const playAgainButton = document.querySelector('#play-again');
 
 function playAgain() {
-  const main = document.querySelector('main');
-  main.innerHTML = `
-  <h2>Guess Game</h2>
-  <p>Guess the number between 0 and 10</p>
-  <form class="container">
-    <input type="number" placeholder="5" id="attempt" />
-    <button id="try" type="button" onclick="tryAttempt()">Check Result</button>
-  </form>
-  <div id="when-fail"></div>
-  `;
+  toggleScreen('game-screen');
 
   clearPreviousGame();
+}
+
+function toggleScreen(screen) {
+  const main = document.querySelector('main');
+
+  const resultTitle = document.querySelector('#resultTitle');
+
+  const gameScreen = screen == 'game-screen';
+
+  if (gameScreen) {
+    main.classList.remove('result-screen');
+    main.classList.add('game-screen');
+  } else {
+    main.classList.add('result-screen');
+    main.classList.remove('game-screen');
+
+    resultTitle.innerHTML = `You got it right in ${attemptsToWin} attempts`;
+
+    clearInput();
+  }
 }

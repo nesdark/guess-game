@@ -51,6 +51,16 @@ main {
   border-radius: 0.6rem;
 }
 
+main.game-screen .game,
+main.result-screen .result-screen {
+  display: block;
+}
+
+main .game,
+main .result-screen {
+  display: none;
+}
+
 main h2 {
   margin-bottom: 1.6rem;
 
@@ -115,7 +125,7 @@ main button {
 
   color: #ffffff;
   transition: all 0.3s ease;
-  
+
   cursor: pointer;
 }
 
@@ -125,7 +135,7 @@ main button:hover {
 }
 
 main button#play-again {
-border-radius: 4px;
+  border-radius: 4px;
 }
 
 main p.incorrect {

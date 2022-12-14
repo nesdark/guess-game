@@ -18,16 +18,20 @@
   </head>
   <body>
     <div class="app">
-      <main id="box">
-        <h2>Guess Game</h2>
-        <p>Guess the number between 0 and 10</p>
-        <form class="container">
-          <input type="number" placeholder="5" id="attempt" />
-          <button id="try" type="button" onclick="tryAttempt()">
-            Check Result
-          </button>
-        </form>
-        <div id="when-fail"></div>
+      <main id="box" class="game-screen">
+        <div class="game">
+          <h2>Guess Game</h2>
+          <p>Guess the number between 0 and 10</p>
+          <form class="container">
+            <input type="number" placeholder="5" id="attempt" />
+            <button id="try" type="button">Check Result</button>
+          </form>
+          <div id="when-fail"></div>
+        </div>
+        <div class="result-screen">
+          <h2 id="resultTitle"></h2>
+          <button id="play-again" onclick="playAgain()">Play Again</button>
+        </div>
       </main>
     </div>
     <script src="./script.js"></script>
