@@ -10,8 +10,6 @@
 */
 let randomNumber = Math.round(Math.random() * 10);
 
-alert(randomNumber);
-
 let checkResultButton = document.querySelector('#try');
 
 let attemptsToWin = 0;
@@ -36,10 +34,6 @@ function checkAttempt() {
   attemptsToWin++;
 
   const playerWin = attemptOfTheUser == randomNumber;
-
-  console.log(playerWin);
-  console.log(attemptOfTheUser);
-  console.log(randomNumber);
 
   if (playerWin) {
     toggleScreen('result-screen');
